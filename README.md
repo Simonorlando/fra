@@ -1,137 +1,24 @@
-Taxi Traffic Analysis Project
-This project focuses on analyzing taxi traffic within a city to identify patterns in stop locations, peak traffic times, and critical points in the road network. By employing data science techniques, including spatial and temporal analysis, clustering, and predictive modeling, the project aims to understand and forecast taxi behavior concerning stops. The ultimate goal is to optimize traffic flow and improve the management of key areas, providing valuable insights for local authorities and mobility services.
+# Taxi Mobility Analysis
+## Project Overview
+This project focuses on analyzing taxi traffic within a city to identify patterns in stops across various areas, peak traffic times, and critical points in the road network. By employing data science techniques, including spatial and temporal analysis, clustering, and predictive modeling, the project aims to understand and forecast taxi behavior related to stops. The ultimate goal is to optimize traffic flow and improve the management of key areas, providing valuable insights for local authorities and mobility services.
 
-Table of Contents
-Project Overview
+## Data Processing
+The analysis begins with loading and preprocessing the taxi trajectory data. The dataset includes records of taxi movements, detailing timestamps, driver IDs, and GPS coordinates. Initial steps involve filtering out anomalies, such as records with unrealistic speeds exceeding 250 km/h, and applying spatial compression to reduce redundancy in trajectory points within a 0.2 km radius.
 
-Dataset Description
+## Spatial Analysis
+To examine the spatial distribution of taxi stops, the city is divided into tessellated zones based on zip codes. Each taxi stop is assigned to a corresponding tile, allowing for the calculation of the number of stops per tile and the average stop duration. This approach helps identify areas with high stop densities or prolonged dwell times, which are crucial for traffic management and urban planning.
 
-Data Processing
+## Movement Analysis Between Tiles
+A movement graph is constructed to represent taxi transitions between tiles. Nodes in the graph correspond to tiles, and edges represent movements between them, weighted by frequency. Calculating the betweenness centrality of each node identifies critical tiles that serve as key connectors in the taxi movement network. Visualizing this graph highlights significant movement patterns and potential bottlenecks within the city's transportation system.
 
-Exploratory Data Analysis
+## Clustering Analysis
+Clustering techniques, specifically K-Means, are applied to group tiles based on the number of stops and movement frequencies. The optimal number of clusters is determined using the elbow method and silhouette scores. Visualizing these clusters on a map reveals areas with similar mobility characteristics, aiding in targeted traffic management strategies.
 
-Clustering Analysis
+## Temporal Movement Analysis
+The project segments taxi movement data into four time intervals: morning (6 AM–12 PM), afternoon (12 PM–6 PM), evening (6 PM–12 AM), and night (12 AM–6 AM). For each interval, subgraphs are created to analyze movement patterns, and the top five most frequent routes are identified. This temporal analysis provides insights into how taxi traffic varies throughout the day, informing time-specific traffic management interventions.
 
-Temporal Movement Analysis
+## Bottleneck Identification
+Combining structural (centrality) and behavioral (frequency) dimensions, the analysis identifies critical points in the system. The four tiles with the highest betweenness centrality are selected, and the 20 most frequent paths passing through them are analyzed. Visualizing these on a map highlights the core interconnection network—the critical backbone that would bear the brunt of any congestion or disruption. This information is vital for prioritizing areas in need of infrastructure improvements or traffic regulation adjustments.
 
-Bottleneck Identification
-
-Conclusion
-
-Requirements
-
-Usage
-
-License
-
-Acknowledgments
-
-Project Overview
-The project's objective is to analyze taxi traffic data to uncover patterns related to stop locations, traffic congestion times, and critical points within the city's road network. Through data science methodologies, the project applies spatial and temporal analysis, clustering, and predictive modeling to comprehend and anticipate taxi stop behaviors. This analysis aims to enhance traffic flow and improve the management of critical areas, offering actionable insights for local authorities and transportation services.
-
-Dataset Description
-The dataset utilized in this project comprises taxi trajectory data, including information such as:
-
-Longitude and Latitude: Geographic coordinates of taxi positions.
-
-Timestamp: Date and time of recorded positions.
-
-Driver ID: Unique identifier for each taxi driver.
-
-The data covers a period from May 17, 2008, to June 10, 2008, and includes records for 50 unique vehicles.
-
-Data Processing
-The data processing steps involve:
-
-Filtering: Removing records with speeds exceeding 250 km/h to eliminate anomalies.
-
-Compression: Applying spatial compression with a radius of 0.2 km to reduce redundancy in trajectory points.
-
-After processing, the dataset is transformed into a GeoDataFrame with associated geometries for spatial analysis.
-
-Exploratory Data Analysis
-Key analyses performed include:
-
-Stop Count per Tile: Calculating the number of stops within each geographic tile.
-
-Average Stop Duration: Determining the average duration of stops in each tile.
-
-These analyses help identify areas with high stop densities and longer stop durations, which are critical for traffic management and urban planning.
-
-Clustering Analysis
-The project employs clustering techniques to group geographic tiles based on:
-
-Number of Stops: Total stops recorded in each tile.
-
-Entry and Exit Frequencies: Frequency of movements into and out of each tile.
-
-Using the K-Means algorithm, the optimal number of clusters is determined, and tiles are grouped accordingly. This clustering reveals areas with similar traffic patterns, aiding in targeted traffic optimization strategies.
-
-Temporal Movement Analysis
-The dataset is segmented into four time intervals:
-
-Morning: 6 AM to 12 PM
-
-Afternoon: 12 PM to 6 PM
-
-Evening: 6 PM to 12 AM
-
-Night: 12 AM to 6 AM
-
-For each interval, movement graphs are constructed to analyze traffic patterns, and the top 5 most frequent routes are identified. This temporal analysis provides insights into how traffic behaviors change throughout the day, informing time-specific traffic management policies.
-
-Bottleneck Identification
-By calculating the betweenness centrality within the movement graph, the project identifies critical tiles that serve as bottlenecks in the traffic network. The top 4 tiles with the highest centrality are highlighted, along with the 20 most frequent routes passing through them. Visualizations are created to map these bottlenecks and frequent routes, emphasizing areas that may require intervention to alleviate congestion.
-
-Conclusion
-The analysis offers a comprehensive view of taxi traffic patterns, highlighting high-traffic areas and potential congestion points. By applying clustering and temporal analyses, the project identifies critical zones and peak times for traffic, providing valuable insights for optimizing traffic flow and enhancing urban mobility management.
-
-Requirements
-The project requires the following Python libraries:
-
-geopandas
-
-pandas
-
-scikit-mobility
-
-folium
-
-networkx
-
-statsmodels
-
-matplotlib
-
-shapely
-
-geopy
-
-numpy
-
-scikit-learn
-
-collections
-
-pmdarima
-
-These dependencies are listed in the requirements.txt file.
-
-Usage
-To replicate the analysis:
-
-Install Dependencies: Use the package manager pip to install the required libraries.
-
-bash
-Copy
-Edit
-pip install -r requirements.txt
-Data Preparation: Load the taxi trajectory data into a DataFrame, ensuring it includes columns for longitude, latitude, timestamp, and driver ID.
-
-Run Analysis: Execute the provided Python scripts to perform data processing, exploratory analysis, clustering, temporal movement analysis, and bottleneck identification.
-
-Visualizations: Utilize the generated visualizations to interpret the results and derive insights for traffic optimization.
-
-License
-This project is licensed under the MIT License. See the LICENSE file for details.
-
+## Conclusion
+The comprehensive analysis offers a detailed understanding of taxi traffic patterns within the city, pinpointing high-traffic areas and primary congestion points. By integrating spatial and temporal analyses with clustering and predictive modeling, the project provides actionable insights to optimize traffic flow and enhance the management of critical areas. These findings are valuable for local authorities and mobility services aiming to improve urban transportation systems.
