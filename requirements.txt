@@ -1,0 +1,12 @@
+pandas
+geopandas
+scikit-mobility
+folium
+matplotlib
+shapely
+geopy
+networkx
+numpy
+scikit-learn
+statsmodels
+pmdarima
